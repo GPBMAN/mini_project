@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maksym Lehkov - About Me</title>
+    <!-- Google Font: Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #121316;           /* Background */
+            --card-bg: #1e2025;            /* Container / Card background */
+            --input-bg: #16181d;           /* Table / Element background */
+            --text-main: #e2e8f0;          /* Main light text */
+            --text-muted: #94a3b8;         /* Muted slate text */
+            --border-color: #2e3440;       /* Dark border color */
+            --accent-blue: #5c8ca8;        /* Toned-down cyan/blue */
+            --accent-hover: #4b7893;       /* Hover state cyan/blue */
+            --badge-bg: rgba(92, 140, 168, 0.15);
+            --badge-text: #5c8ca8;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            min-height: 100vh;
+            padding: 2.5rem 1.5rem;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 680px;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        header {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        header h1 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--text-main);
+            letter-spacing: -0.02em;
+        }
+
+        header p {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--badge-text);
+        }
+
+        section {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        h2 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-main);
+            letter-spacing: -0.01em;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            word-break: break-word;
+        }
+
+        ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        ul li {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        ul li strong {
+            color: var(--text-main);
+            font-weight: 600;
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            background-color: var(--input-bg);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 0.95rem;
+        }
+
+        th {
+            background-color: rgba(30, 32, 37, 0.8);
+            color: var(--text-main);
+            font-weight: 600;
+            padding: 0.85rem 1.15rem;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+        }
+
+        td {
+            padding: 1rem 1.15rem;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-muted);
+            vertical-align: middle;
+        }
+
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        tbody tr:hover {
+            background-color: rgba(255, 255, 255, 0.015);
+        }
+
+        .projects-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #ffffff;
+            background-color: var(--accent-blue);
+            text-decoration: none;
+            padding: 0.75rem 1.25rem;
+            border-radius: 8px;
+            align-self: flex-start;
+            transition: background-color 0.2s ease, transform 0.1s ease;
+        }
+
+        .projects-link:hover {
+            background-color: var(--accent-hover);
+        }
+
+        .projects-link:active {
+            transform: scale(0.99);
+        }
+
+        @media (max-width: 640px) {
+            body {
+                padding: 1.5rem 1rem;
+            }
+
+            header, section {
+                padding: 1.5rem;
+            }
+
+            th, td {
+                padding: 0.75rem 1rem;
+            }
+
+            .projects-link {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Maksym Lehkov</h1>
+            <p>Programmer</p>
+        </header>
+
+        <main class="container" style="gap: 1.5rem;">
+            <!-- Bio Section -->
+            <section>
+                <h2>About Me</h2>
+                <p>Hello, I like coding. I can code in Python, CSS, and HTML also a little bit of QML. I really enjoy playing video games.</p>
+                <p>My favorite things to do are: coding, biking, playing video games, chess, and other things.</p>
+            </section>
+
+            <!-- Skills Section -->
+            <section>
+                <h2>Skills & Expertise</h2>
+                <ul>
+                    <li><strong>Languages:</strong> Python, HTML, CSS</li>
+                    <li><strong>Frameworks:</strong> Django, FastAPI, QuickShell</li>
+                    <li><strong>Databases:</strong> SQLite</li>
+                    <li><strong>Tools:</strong> Git, VS Code</li>
+                </ul>
+            </section>
+
+            <!-- Experience / Background -->
+            <section>
+                <h2>Experience</h2>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Role</th>
+                                <th>Company</th>
+                                <th>Years</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong style="color: var(--text-main);">Student</strong></td>
+                                <td>GoITeens</td>
+                                <td>Present</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Projects Section -->
+            <section>
+                <h2>Selected Projects</h2>
+                <a href="/portfolio/projects" class="projects-link">&larr; All my projects</a>
+            </section>
+        </main>
+    </div>
+
+</body>
+</html>

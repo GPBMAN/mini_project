@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing Table</title>
+    <!-- Google Font: Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #121316;           /* Background */
+            --card-bg: #1e2025;            /* Container / Card background */
+            --input-bg: #16181d;           /* Input / Table Row background */
+            --text-main: #e2e8f0;          /* Main light text */
+            --text-muted: #94a3b8;         /* Muted slate text */
+            --border-color: #2e3440;       /* Dark border color */
+            --accent-blue: #5c8ca8;        /* Toned-down cyan/blue */
+            --accent-hover: #4b7893;       /* Hover state cyan/blue */
+            --badge-bg: rgba(92, 140, 168, 0.15);
+            --badge-text: #5c8ca8;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            min-height: 100vh;
+            padding: 2.5rem 1.5rem;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        h2 {
+            font-size: 1.35rem;
+            font-weight: 600;
+            color: var(--text-main);
+            letter-spacing: -0.02em;
+        }
+
+        .pricing-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            background-color: var(--input-bg);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 0.95rem;
+        }
+
+        th {
+            background-color: rgba(30, 32, 37, 0.8);
+            color: var(--text-main);
+            font-weight: 600;
+            padding: 1rem 1.25rem;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+        }
+
+        td {
+            padding: 1.15rem 1.25rem;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-main);
+            vertical-align: middle;
+        }
+
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        tbody tr:hover {
+            background-color: rgba(255, 255, 255, 0.015);
+        }
+
+        tfoot td {
+            background-color: rgba(30, 32, 37, 0.8);
+            font-weight: 600;
+            border-top: 1px solid var(--border-color);
+            border-bottom: none;
+            color: var(--text-main);
+        }
+
+        /* Custom Checkbox */
+        input[type="checkbox"] {
+            appearance: none;
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            background-color: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.2s ease, border-color 0.2s ease;
+        }
+
+        input[type="checkbox"]:checked {
+            background-color: var(--accent-blue);
+            border-color: var(--accent-blue);
+        }
+
+        input[type="checkbox"]:checked::after {
+            content: "";
+            width: 5px;
+            height: 10px;
+            border: solid #ffffff;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+            margin-bottom: 2px;
+        }
+
+        input[type="checkbox"]:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(92, 140, 168, 0.2);
+        }
+
+        .item-desc {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+            line-height: 1.4;
+        }
+
+        .item-price {
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .empty-state {
+            text-align: center;
+            color: var(--text-muted);
+            padding: 2.5rem !important;
+        }
+
+        button[type="submit"] {
+            align-self: flex-start;
+            padding: 0.75rem 1.5rem;
+            font-family: inherit;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #ffffff;
+            background-color: var(--accent-blue);
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.2s ease, transform 0.1s ease;
+        }
+
+        button[type="submit"]:hover {
+            background-color: var(--accent-hover);
+        }
+
+        button[type="submit"]:active {
+            transform: scale(0.99);
+        }
+
+        @media (max-width: 640px) {
+            body {
+                padding: 1.5rem 1rem;
+            }
+
+            .card {
+                padding: 1.5rem;
+            }
+
+            th, td {
+                padding: 0.85rem 1rem;
+            }
+
+            button[type="submit"] {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <main class="container">
+        <div class="card">
+            <div class="card-header">
+                <h2>Pricing Table</h2>
+            </div>
+
+            <form method="post" action="{% url 'process_selection' %}" class="pricing-form">
+                {% csrf_token %}
+                
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th style="width: 10%;">Select</th>
+                                <th style="width: 30%;">Item / Feature</th>
+                                <th style="width: 45%;">Description</th>
+                                <th style="width: 15%;">Price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if items %}
+                                {% for item in items %}
+                                    <tr>
+                                        <td>
+                                            <input 
+                                                type="checkbox" 
+                                                name="selected_items" 
+                                                value="{{ item.id }}" 
+                                                class="item-checkbox" 
+                                                data-price="{{ item.price }}" 
+                                                {% if item.is_default_selected %}checked{% endif %}
+                                                onchange="calculateTotal()"
+                                            >
+                                        </td>
+                                        <td><strong>{{ item.name }}</strong></td>
+                                        <td><span class="item-desc">{{ item.desc }}</span></td>
+                                        <td><span class="item-price">${{ item.price }}</span></td>
+                                    </tr>
+                                {% endfor %}
+                            {% else %}
+                                <tr>
+                                    <td colspan="4" class="empty-state">No pricing items available.</td>
+                                </tr>
+                            {% endif %}
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="3"><strong>Total Price:</strong></td>
+                                <td><strong id="total-price" style="color: var(--accent-blue);">$0.00</strong></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+
+                <button type="submit">Proceed with Selection</button>
+            </form>
+        </div>
+    </main>
+
+    <script>
+        function calculateTotal() {
+            const checkboxes = document.querySelectorAll('.item-checkbox');
+            let total = 0;
+            
+            checkboxes.forEach(checkbox => {
+                if (checkbox.checked) {
+                    const price = parseFloat(checkbox.getAttribute('data-price'));
+                    if (!isNaN(price)) {
+                        total += price;
+                    }
+                }
+            });
+
+            document.getElementById('total-price').textContent = '$' + total.toFixed(2);
+        }
+
+        document.addEventListener('DOMContentLoaded', calculateTotal);
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project List</title>
+    <!-- Google Font: Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #121316;           /* Background */
+            --card-bg: #1e2025;            /* Card background */
+            --text-main: #e2e8f0;          /* Light main text */
+            --text-muted: #94a3b8;         /* Muted text */
+            --border-color: #2e3440;       /* Border color */
+            --accent-blue: #5c8ca8;        /* Cyan/blue accent */
+            --accent-hover: #4b7893;       /* Accent hover */
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            min-height: 100vh;
+            padding: 2.5rem 1.5rem;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 680px;
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.85rem;
+        }
+
+        .project-item {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 1.15rem 1.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            transition: border-color 0.2s ease;
+        }
+
+        .project-item:hover {
+            border-color: #3b4252;
+        }
+
+        .project-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .project-name {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .project-description {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+
+        .project-link {
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--accent-blue);
+            text-decoration: none;
+            white-space: nowrap;
+            transition: color 0.2s ease;
+        }
+
+        .project-link:hover {
+            color: var(--accent-hover);
+            text-decoration: underline;
+        }
+
+        .empty-state {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 2rem;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 640px) {
+            body {
+                padding: 1.5rem 1rem;
+            }
+
+            .project-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <main class="container">
+        <h1>All Projects</h1>
+
+        <ul class="project-list">
+            {% for project in projects %}
+                <li class="project-item">
+                    <div class="project-info">
+                        <strong class="project-name">{{ project.name }}</strong>
+                        <span class="project-description">{{ project.description }}</span>
+                    </div>
+                    <a href="/portfolio/project/{{ project.id }}" class="project-link">go to project &rarr;</a>
+                </li>
+            {% empty %}
+                <li class="empty-state">Nothing in the model</li>
+            {% endfor %}
+        </ul>
+    </main>
+
+</body>
+</html>
