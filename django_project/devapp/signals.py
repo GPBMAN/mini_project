@@ -49,7 +49,7 @@ def post_project_gallery(sender, instance, created, **kwargs):
                     field.save(file_name, ContentFile(buffer.read()), save=False)
                     print(f"Saved {file_name} in {size[0]}px x {size[1]}px")
 
-                # Generate variants
+                
                 resize_and_save('thumbnail', (150, 150))
                 print("Trying to save image for thumbnail")
                 resize_and_save('medium_image', (600, 400))
@@ -70,7 +70,7 @@ def post_project_gallery(sender, instance, created, **kwargs):
             send_mail(
                 subject="Gallery for your Project",
                 message="Your gallery has been saved successfuly",
-                from_email=None,  # Defaults to DEFAULT_FROM_EMAIL in settings.py
+                from_email=None,  
                 recipient_list=[instance.project.user.email],
-                fail_silently=False,  # Set to True if you want to suppress errors
+                fail_silently=False,  
             )
