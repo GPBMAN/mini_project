@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>{{ post.title }}</title>
+    </head>
+    <body>
+        <h1>{{ post.title }}</h1>
+        <p>By {{ post.author }} on {{ post.created_at }}</p>
+        <hr>
+        <p>{{ post.text }}</p>
+
+        {% for comment in comments %}
+            <div>
+                <h3>{{ comment.author }} - {{ comment.created_at }}:</h3>
+                <p>{{ comment.text }}</p>
+            </div>
+            <hr>
+        {% endfor %}
+        <a href="{% url 'add_comment' post.id %}"><button>comment</button></a>
+
+        <br>
+        <a href="{% url 'all_posts' %}">Back to all posts</a>
+    </body>
+</html>

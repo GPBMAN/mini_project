@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Comment to {{ post.title }}</title>
+</head>
+<body>
+    <h1>Leave a comment for: {{ post.title }}</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Submit Comment</button>
+    </form>
+
+    <br>
+    <a href="{% url 'post_detail' post.pk %}">Cancel & Back to Post</a>
+</body>
+</html>
