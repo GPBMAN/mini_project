@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Shopping Cart</title>
+</head>
+<body>
+    {% if user.is_authenticated %}
+        <a href="{% url 'profile' %}">My Profile</a>
+        <a href="{% url 'edit_profile' %}">Edit Profile</a>
+        <a href="{% url 'all_products' %}">All Products</a>
+        <form method="post" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit">Logout</button>
+        </form>
+    {% else %}
+        <a href="{% url 'login' %}">Login</a>
+        <a href="{% url 'register' %}">Register</a>
+    {% endif %}   
+
+    <h1>Your Cart ({{ cart|length }} items)</h1>
+
+    {% if cart|length > 0 %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Unit Price</th>
+                    <th>Total</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in cart %}
+                    <tr>
+                        <td>{{ item.product.name }}</td>
+                        <td>
+                            <form action="{% url 'cart_add' item.product.pk %}" method="post">
+                                {% csrf_token %}
+                                <input type="number" name="quantity" value="{{ item.quantity }}" min="1">
+                                <input type="hidden" name="override" value="True">
+                                <button type="submit">Update</button>
+                            </form>
+                        </td>
+                        <td>{{ item.price }}</td>
+                        <td>{{ item.total_price }}</td>
+                        <td>
+                            <form action="{% url 'cart_remove' item.product.pk %}" method="post">
+                                {% csrf_token %}
+                                <button type="submit">Remove</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <p><strong>Grand Total: {{ cart.get_total_price }}</strong></p>
+    {% else %}
+        <p>Your cart is empty.</p>
+    {% endif %}
+    <a>Buy (Does Nothing Yet)</a>
+    <a href="{% url 'all_products' %}">Continue Shopping</a>
+</body>
+</html>

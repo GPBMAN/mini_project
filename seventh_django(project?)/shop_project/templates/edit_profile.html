@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Edit Profile</title>
+    </head>
+    <body>
+        {% if user.is_authenticated %}
+            <a href="{% url 'all_products' %}">Back To Products</a>
+            <a href="{% url 'profile' %}">Cancel Changes</a>
+            <form method="post" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button type="submit">Logout</button>
+            </form>
+        {% else %}
+            <a href="{% url 'login' %}">Login</a>
+            <a href="{% url 'register' %}">Register</a>
+        {% endif %}               
+        <h1>{{ profile.user.username }}'s profile</h1>
+
+        {% if profile.profilePicture %}
+            <img src="{{ profile.profilePicture.url }}" alt="profile picture" style="max-width: 100%; max-height: 400px; width: auto; height: auto;">
+        {% endif %}
+        <hr>
+
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Save Changes</button>
+        </form>
+    </body>
+</html>

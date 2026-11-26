@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detailed Product - {{ product.name }}</title>
+</head>
+<body>
+    {% if user.is_authenticated %}
+        <a href="{% url 'profile' %}">My Profile</a>
+        <a href="{% url 'edit_profile' %}">Edit Profile</a>
+        <a href="{% url 'cart_detail' %}">Cart</a>
+        <form method="post" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit">Logout</button>
+        </form>
+    {% else %}
+        <a href="{% url 'login' %}">Login</a>
+        <a href="{% url 'register' %}">Register</a>
+    {% endif %}      
+    <h1>{{ product.name }}</h1>
+    <hr>
+    <p>Price: {{ product.price }}</p>
+    <p>Weight: {{ product.weight }}</p>
+    <p>Category: <i>{{ product.category }}</i></p> 
+    <hr>
+    <p>{{ product.decription }}</p>
+    {% if product.picture %}
+        <img src="{{ product.picture.url }}" alt="{{ product.name }}" style="max-width: 100%; max-height: 400px; width: auto; height: auto;">
+    {% endif %}
+    <form action="{% url 'cart_add' product.pk %}" method="post">
+        {% csrf_token %}
+        <input type="number" name="quantity" value="1" min="1">
+        <button type="submit">Add to Cart</button>
+    </form>
+
+    <a href="{% url 'all_products' %}"><button>Back to all Products</button></a>
+</body>
+</html>
